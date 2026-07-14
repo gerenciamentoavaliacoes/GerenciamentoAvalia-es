@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Professor {
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  senhaHash String
+  createdAt DateTime @default(now())
+
+  turmas         Turma[]
+  bancosQuestoes BancoQuestoes[]
+}
+
+model Turma {
+  id          String   @id @default(uuid())
+  nome        String
+  codigo      String
+  periodo     String
+  professorId String
+  createdAt   DateTime @default(now())
+
+  professor  Professor   @relation(fields: [professorId], references: [id])
+  matriculas Matricula[]
+  avaliacoes Avaliacao[]
+}
+
+model Aluno {
+  id        String   @id @default(uuid())
+  nome      String
+  matricula String   @unique
+  email     String
+  createdAt DateTime @default(now())
+
+  matriculas    Matricula[]
+  participacoes ParticipanteAvaliacao[]
+}
+
+model Matricula {
+  id      String @id @default(uuid())
+  turmaId String
+  alunoId String
+
+  turma Turma @relation(fields: [turmaId], references: [id])
+  aluno Aluno @relation(fields: [alunoId], references: [id])
+
+  @@unique([turmaId, alunoId])
+}
+
+model BancoQuestoes {
+  id          String   @id @default(uuid())
+  nome        String
+  professorId String
+  createdAt   DateTime @default(now())
+
+  professor Professor @relation(fields: [professorId], references: [id])
+  questoes  Questao[]
+}
+
+enum TipoQuestao {
+  DISCURSIVA
+  MULTIPLA_ESCOLHA
+}
+
+model Questao {
+  id        String      @id @default(uuid())
+  bancoId   String
+  tipo      TipoQuestao
+  enunciado String
+  peso      Float
+  gabarito  String
+  createdAt DateTime    @default(now())
+
+  banco      BancoQuestoes @relation(fields: [bancoId], references: [id])
+  avaliacoes Avaliacao[]   @relation("AvaliacaoQuestoes")
+}
+
+enum TipoAvaliacao {
+  PROVA
+  LISTA_EXERCICIOS
+}
+
+model Avaliacao {
+  id             String        @id @default(uuid())
+  titulo         String
+  tipo           TipoAvaliacao
+  dataInicio     DateTime
+  dataTermino    DateTime
+  ordemAleatoria Boolean       @default(false)
+  turmaId        String
+  createdAt      DateTime      @default(now())
+
+  turma         Turma                   @relation(fields: [turmaId], references: [id])
+  questoes      Questao[]               @relation("AvaliacaoQuestoes")
+  participantes ParticipanteAvaliacao[]
+}
+
+model ParticipanteAvaliacao {
+  id          String @id @default(uuid())
+  avaliacaoId String
+  alunoId     String
+
+  avaliacao Avaliacao @relation(fields: [avaliacaoId], references: [id])
+  aluno     Aluno     @relation(fields: [alunoId], references: [id])
+
+  @@unique([avaliacaoId, alunoId])
+}
