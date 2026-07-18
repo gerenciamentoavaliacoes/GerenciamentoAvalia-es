@@ -19,7 +19,10 @@ export async function criarBancoController(req: NextRequest) {
   return NextResponse.json(banco, { status: 201 });
 }
 
-export async function buscarBancoController(_req: NextRequest, id: string) {
+export async function buscarBancoController(req: NextRequest, id: string) {
+  const auth = autenticarRequisicao(req);
+  if (!auth.autenticado) return auth.resposta;
+
   const banco = await bancoService.buscarPorId(id);
   if (!banco) return NextResponse.json({ erro: "Banco não encontrado" }, { status: 404 });
   return NextResponse.json(banco);

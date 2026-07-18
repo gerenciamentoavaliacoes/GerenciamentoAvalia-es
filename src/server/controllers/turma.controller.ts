@@ -19,7 +19,10 @@ export async function criarTurmaController(req: NextRequest) {
   return NextResponse.json(turma, { status: 201 });
 }
 
-export async function buscarTurmaController(_req: NextRequest, id: string) {
+export async function buscarTurmaController(req: NextRequest, id: string) {
+  const auth = autenticarRequisicao(req);
+  if (!auth.autenticado) return auth.resposta;
+
   const turma = await turmaService.buscarPorId(id);
   if (!turma) return NextResponse.json({ erro: "Turma não encontrada" }, { status: 404 });
   return NextResponse.json(turma);

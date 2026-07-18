@@ -12,6 +12,7 @@ export interface Turma {
   nome: string;
   codigo: string;
   periodo: string;
+  _count?: { matriculas: number; avaliacoes: number };
 }
 
 export interface Aluno {
@@ -24,6 +25,7 @@ export interface Aluno {
 export interface BancoQuestoes {
   id: string;
   nome: string;
+  _count?: { questoes: number };
 }
 
 export interface Questao {

@@ -1,9 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getToken, setToken as persistToken, clearToken } from "@/utils/auth-storage";
 
 export function useAuth() {
   const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    setToken(getToken());
+  }, []);
 
   async function login(email: string, senha: string) {
     const res = await fetch("/api/auth/login", {
@@ -12,9 +17,19 @@ export function useAuth() {
       body: JSON.stringify({ email, senha }),
     });
     const data = await res.json();
-    if (res.ok) setToken(data.token);
-    return data;
+
+    if (res.ok) {
+      persistToken(data.token);
+      setToken(data.token);
+    }
+
+    return { ok: res.ok, erro: data.erro as string | undefined };
   }
 
-  return { token, login };
+  function logout() {
+    clearToken();
+    setToken(null);
+  }
+
+  return { token, login, logout };
 }
