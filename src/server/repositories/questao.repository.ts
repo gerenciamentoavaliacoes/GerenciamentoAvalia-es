@@ -15,6 +15,7 @@ export const questaoRepository = {
     enunciado: string;
     peso: number;
     gabarito: string;
+    alternativas?: string[];
   }) {
     return prisma.questao.create({ data: dados });
   },

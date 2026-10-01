@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, FileQuestion, Plus } from "lucide-react";
+import { ArrowLeft, Check, FileQuestion, Plus } from "lucide-react";
 import { useBanco } from "@/hooks/useBanco";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Card, CardBody } from "@/components/ui/Card";
@@ -55,6 +55,27 @@ export default function BancoEspecificoPage({ params }: { params: { bancoId: str
                         <span className="text-xs text-slate-400">Peso {questao.peso}</span>
                       </div>
                       <p className="text-sm text-slate-800">{questao.enunciado}</p>
+                      {questao.tipo === "MULTIPLA_ESCOLHA" && questao.alternativas?.length > 0 && (
+                        <ul className="mt-2.5 space-y-1">
+                          {questao.alternativas.map((alternativa, indice) => {
+                            const correta = alternativa === questao.gabarito;
+                            return (
+                              <li
+                                key={indice}
+                                className={`flex items-center gap-2 text-sm ${
+                                  correta ? "font-medium text-emerald-700" : "text-slate-600"
+                                }`}
+                              >
+                                <span className="w-5 shrink-0 text-slate-400">
+                                  {String.fromCharCode(65 + indice)})
+                                </span>
+                                {alternativa}
+                                {correta && <Check className="h-3.5 w-3.5" />}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
                     </div>
                   </CardBody>
                 </Card>

@@ -69,13 +69,14 @@ enum TipoQuestao {
 }
 
 model Questao {
-  id        String      @id @default(uuid())
-  bancoId   String
-  tipo      TipoQuestao
-  enunciado String
-  peso      Float
-  gabarito  String
-  createdAt DateTime    @default(now())
+  id           String      @id @default(uuid())
+  bancoId      String
+  tipo         TipoQuestao
+  enunciado    String
+  peso         Float
+  gabarito     String
+  alternativas String[]    @default([])
+  createdAt    DateTime    @default(now())
 
   banco      BancoQuestoes @relation(fields: [bancoId], references: [id])
   avaliacoes Avaliacao[]   @relation("AvaliacaoQuestoes")

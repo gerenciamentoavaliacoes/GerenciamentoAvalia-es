@@ -35,6 +35,7 @@ export interface Questao {
   enunciado: string;
   peso: number;
   gabarito: string;
+  alternativas: string[];
 }
 
 export interface Avaliacao {

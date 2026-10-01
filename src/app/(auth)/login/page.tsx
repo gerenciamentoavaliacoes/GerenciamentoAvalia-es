@@ -58,7 +58,7 @@ export default function LoginPage() {
           </h1>
           <p className="mt-3 text-sm text-brand-100">
             Uma plataforma para professores organizarem bancos de questões, turmas e
-            avaliações — do rascunho à aplicação.
+            avaliações.
           </p>
 
           <ul className="mt-8 space-y-4">

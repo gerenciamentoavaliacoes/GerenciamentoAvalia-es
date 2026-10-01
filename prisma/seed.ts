@@ -37,6 +37,7 @@ const BANCOS = [
         enunciado: "Qual estrutura de dados utiliza o princípio LIFO?",
         peso: 1,
         gabarito: "Pilha",
+        alternativas: ["Fila", "Pilha", "Árvore", "Grafo"],
       },
       {
         tipo: TipoQuestao.DISCURSIVA,
@@ -49,6 +50,7 @@ const BANCOS = [
         enunciado: "Qual a complexidade de busca em uma árvore binária de busca balanceada?",
         peso: 1.5,
         gabarito: "O(log n)",
+        alternativas: ["O(1)", "O(n)", "O(log n)", "O(n²)"],
       },
       {
         tipo: TipoQuestao.DISCURSIVA,
@@ -72,6 +74,7 @@ const BANCOS = [
         enunciado: "No Prisma, qual comando aplica uma nova migration ao banco de dados?",
         peso: 1,
         gabarito: "npx prisma migrate dev",
+        alternativas: ["npx prisma generate", "npx prisma migrate dev", "npx prisma studio", "npx prisma db pull"],
       },
       {
         tipo: TipoQuestao.DISCURSIVA,
@@ -84,6 +87,7 @@ const BANCOS = [
         enunciado: "Qual cláusula SQL é usada para filtrar resultados de uma consulta?",
         peso: 1,
         gabarito: "WHERE",
+        alternativas: ["SELECT", "ORDER BY", "WHERE", "GROUP BY"],
       },
       {
         tipo: TipoQuestao.DISCURSIVA,
@@ -107,6 +111,7 @@ const BANCOS = [
         enunciado: "Qual hook do React é usado para efeitos colaterais e carga assíncrona de dados?",
         peso: 1,
         gabarito: "useEffect",
+        alternativas: ["useState", "useEffect", "useMemo", "useRef"],
       },
       {
         tipo: TipoQuestao.DISCURSIVA,
@@ -119,6 +124,7 @@ const BANCOS = [
         enunciado: "Qual método transforma um array aplicando uma função a cada elemento?",
         peso: 1,
         gabarito: "map",
+        alternativas: ["filter", "reduce", "map", "find"],
       },
       {
         tipo: TipoQuestao.DISCURSIVA,
@@ -131,6 +137,7 @@ const BANCOS = [
         enunciado: "Qual palavra-chave declara uma função assíncrona?",
         peso: 1,
         gabarito: "async",
+        alternativas: ["await", "async", "defer", "yield"],
       },
     ],
   },
@@ -142,6 +149,7 @@ const BANCOS = [
         enunciado: "Qual código de status HTTP indica que um recurso foi criado com sucesso?",
         peso: 1,
         gabarito: "201",
+        alternativas: ["200", "201", "204", "400"],
       },
       {
         tipo: TipoQuestao.DISCURSIVA,
@@ -154,6 +162,7 @@ const BANCOS = [
         enunciado: "Qual cabeçalho HTTP é usado para autenticação via token Bearer?",
         peso: 1,
         gabarito: "Authorization",
+        alternativas: ["Content-Type", "Accept", "Authorization", "Cookie"],
       },
       {
         tipo: TipoQuestao.DISCURSIVA,
